@@ -1,0 +1,106 @@
+{
+  "name": "unzip",
+  "displayName": "Unzip",
+  "description": "A VS Code extension to extract zip files directly within the editor.",
+  "version": "1.0.0",
+  "publisher": "kingleo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/vscode-unzip.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.unzip",
+    "onCommand:extension.unzipFromExplorer"
+  ],
+  "main": "./dist/extension.js",
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#FFFFFF",
+    "theme": "light"
+  },
+  "contributes": {
+    "configuration": {
+      "title": "Unzip",
+      "properties": {
+        "unzip.defaultExtractionPath": {
+          "type": "string",
+          "default": "./extracted",
+          "description": "Default directory to extract zip files."
+        },
+        "unzip.overwriteExistingFiles": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to overwrite existing files during extraction."
+        },
+        "unzip.showProgressBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to show a progress bar during extraction."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "extension.unzip",
+        "title": "Unzip File"
+      },
+      {
+        "command": "extension.unzipFromExplorer",
+        "title": "Unzip",
+        "icon": {
+          "light": "images/icon-light.svg",
+          "dark": "images/icon-dark.svg"
+        }
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "extension.unzipFromExplorer",
+          "when": "resourceExtname == .zip",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.4",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "typescript": "^5.3.3",
+    "@vscode/test-electron": "^2.3.8"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.11"
+  },
+  "keywords": [
+    "unzip",
+    "extract",
+    "zip",
+    "file-management",
+    "vscode",
+    "extension"
+  ],
+  "license": "MIT"
+}
